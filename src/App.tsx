@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PlusCircle, TrendingUp, TrendingDown, Wallet, Trash2 } from 'lucide-react';
-import type { Transaction } from './types';
+import type { Transaction } from './models';
 
 function App() {
   // 1. State for our list of transactions
