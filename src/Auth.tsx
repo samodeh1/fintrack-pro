@@ -55,6 +55,7 @@ export const Auth = ({ onLogin }: AuthProps) => {
              className="w-full p-3 border rounded-xl" 
              onChange={e => setEmail(e.target.value)} 
            />
+           <p onClick={() => setView('forgot')} className="text-right text-xs text-blue-600 cursor-pointer">Forgot Password?</p>
            <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Send Link</button>
         </form>
         <button onClick={() => setView('login')} className="mt-4 text-blue-600 text-sm">Back to Login</button>
