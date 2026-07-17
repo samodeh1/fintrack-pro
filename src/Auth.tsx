@@ -16,7 +16,7 @@ export const Auth = ({ onLogin }: AuthProps) => {
         e.preventDefault();
         const endpoint = isLogin ? 'login' : 'register';
         try {
-            const res = await axios.post(`https://fintrack-api-812r.onrender.com`, {
+            const res = await axios.post(`https://fintrack-api-812r.onrender.com/api/auth/${endpoint}`, {
                 email, password, username
             });
             if (isLogin) {

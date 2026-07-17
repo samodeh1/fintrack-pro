@@ -23,7 +23,7 @@ const [newCategory, setNewCategory] = useState('Food');
   // 1. Fetch from Database instead of LocalStorage
   const fetchTransactions = async (activeToken: string) => {
      try {
-      const res = await axios.get('https://fintrack-api-812r.onrender.com', {
+      const res = await axios.get('https://fintrack-api-812r.onrender.com/api/transactions', {
         headers: { 'x-auth-token': activeToken }
       });
       setTransactions(res.data);
@@ -46,7 +46,7 @@ const [newCategory, setNewCategory] = useState('Food');
     };
 
       try {
-        const res = await axios.post('https://fintrack-api-812r.onrender.com',
+        const res = await axios.post('https://fintrack-api-812r.onrender.com/api/transactions',
           newEntry, {
             headers: { 'x-auth-token': token }
           });
@@ -64,7 +64,7 @@ const [newCategory, setNewCategory] = useState('Food');
     const deleteTransanction = async (id: string) => {
       if (window.confirm('Are you sure you want to delete this?')) {
         try {
-          await axios.delete(`https://fintrack-api-812r.onrender.com/${id}`, {
+          await axios.delete(`https://fintrack-api-812r.onrender.com/api/transactions/${id}`, {
             headers: { 'x-auth-token': token }
           });
           //  Filter out by both possible ID fields (MongoDB uses _id)
