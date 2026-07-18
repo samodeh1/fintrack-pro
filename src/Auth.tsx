@@ -14,11 +14,13 @@ export const Auth = ({ onLogin }: AuthProps) => {
     const [username, setUsername] = useState('');
     const [view, setView] = useState<'login' | 'register' | 'forgot'>('login');
 
+      const API_URL = "https://fintrack-api-812r.onrender.com/api/auth";
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const endpoint = isLogin ? 'login' : 'register';
         try {
-            const res = await axios.post(`https://fintrack-api-812r.onrender.com/api/auth/${endpoint}`, {
+            const res = await axios.post(`${API_URL}/${endpoint}`, {
                 email, password, username
             });
             if (isLogin) {
@@ -36,8 +38,9 @@ export const Auth = ({ onLogin }: AuthProps) => {
 
      const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email) return toast.error("Please enter your email");
     try {
-      await axios.post('https://fintrack-api-812r.onrender.com/api/auth/forgot-password', { email });
+      await axios.post(`${API_URL}/forgot-password`, { email });
       toast.success("Check your email for the link!");
       setView('login');
     } catch (err: any) {
@@ -47,19 +50,28 @@ export const Auth = ({ onLogin }: AuthProps) => {
 
   if (view === 'forgot') {
     return (
-      <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-6">Reset Password</h2>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+         <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center">
+        <h2 className="text-2xl font-bold mb-2">Reset Password</h2>
+                    <p className="text-gray-500 text-sm mb-6">We will send a reset link to your inbox</p>
         <form onSubmit={handleForgotPassword} className="space-y-4">
-           <input 
+           <input
+            required
+            type="email" 
              placeholder="Enter your email" 
-             className="w-full p-3 border rounded-xl" 
-             onChange={e => setEmail(e.target.value)} 
+             className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" 
+             onChange={e => setEmail(e.target.value)}
+              
            />
-           <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Send Link</button>
+           <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">
+             Send Reset Link
+        </button>
         </form>
-        <button onClick={() => setView('login')} className="mt-4 text-blue-600 text-sm">Back to Login</button>
-        <p onClick={() => setView('forgot')} className="text-right text-xs text-blue-600 cursor-pointer">Forgot Password?</p>
+        <button onClick={() => setView('login')} className="mt-6 text-blue-600 text-sm font-medium hover:underline">
+            Back to Login
+        </button>
       </div>
+    </div>
     );
   }
 
@@ -79,7 +91,12 @@ export const Auth = ({ onLogin }: AuthProps) => {
                     <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
                         {isLogin ? 'Login' : 'Sign Up'}
                     </button>
-
+                    <p 
+                    onClick={() => setView('forgot')} 
+                    className="text-right text-xs text-blue-600 cursor-pointer hover:underline"
+                    >
+                    Forgot Password?
+                    </p>
                     <div className="my-6 flex items-center justify-center gap-2">
                     <hr className="w-full border-gray-300" />
                     <span className="text-gray-400 text-xs uppercase">OR</span>
