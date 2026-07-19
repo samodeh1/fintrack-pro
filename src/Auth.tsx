@@ -14,7 +14,8 @@ export const Auth = ({ onLogin }: AuthProps) => {
     const [username, setUsername] = useState('');
     const [view, setView] = useState<'login' | 'register' | 'forgot'>('login');
 
-      const API_URL = "https://fintrack-api-812r.onrender.com/api/auth";
+    // CRUCIAL: Use your Render URL here. NO LOCALHOST!
+    const API_URL = "https://fintrack-api-812r.onrender.com/api/auth";
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,98 +29,103 @@ export const Auth = ({ onLogin }: AuthProps) => {
                 toast.success("Welcome back!");
             } else {
                 setIsLogin(true);
-                toast.success("Register! Please login.");
+                toast.success("Account created! Please login.");
             }
-            
         } catch (err: any) {
             toast.error(err.response?.data?.message || "Something went wrong");
         }
     };
 
-     const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return toast.error("Please enter your email");
-    try {
-      await axios.post(`${API_URL}/forgot-password`, { email });
-      toast.success("Check your email for the link!");
-      setView('login');
-    } catch (err: any) {
-      toast.error("Email not found");
+    const handleForgotPassword = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return toast.error("Please enter your email");
+        const loading = toast.loading("Sending reset link...");
+        try {
+            await axios.post(`${API_URL}/forgot-password`, { email });
+            toast.dismiss(loading);
+            toast.success("Check your email!");
+            setView('login');
+        } catch (err: any) {
+            toast.dismiss(loading);
+            toast.error("Email not found");
+        }
+    };
+
+    // --- VIEW: FORGOT PASSWORD ---
+    if (view === 'forgot') {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+                <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center">
+                    <h2 className="text-2xl font-bold mb-2">Reset Password</h2>
+                    <p className="text-gray-400 text-sm mb-6">We will send a reset link to your inbox</p>
+                    <form onSubmit={handleForgotPassword} className="space-y-4 text-left">
+                        <input 
+                            required
+                            type="email"
+                            placeholder="Enter your email" 
+                            className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" 
+                            onChange={e => setEmail(e.target.value)} 
+                        />
+                        <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">
+                            Send Reset Link
+                        </button>
+                    </form>
+                    <button onClick={() => setView('login')} className="mt-6 text-blue-600 text-sm font-medium hover:underline">
+                        Back to Login
+                    </button>
+                </div>
+            </div>
+        );
     }
-  };
 
-  if (view === 'forgot') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-         <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center">
-        <h2 className="text-2xl font-bold mb-2">Reset Password</h2>
-                    <p className="text-gray-500 text-sm mb-6">We will send a reset link to your inbox</p>
-        <form onSubmit={handleForgotPassword} className="space-y-4">
-           <input
-            required
-            type="email" 
-             placeholder="Enter your email" 
-             className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none" 
-             onChange={e => setEmail(e.target.value)}
-              
-           />
-           <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">
-             Send Reset Link
-        </button>
-        </form>
-        <button onClick={() => setView('login')} className="mt-6 text-blue-600 text-sm font-medium hover:underline">
-            Back to Login
-        </button>
-      </div>
-    </div>
-    );
-  }
-
+    // --- VIEW: LOGIN / REGISTER ---
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
             <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full">
                 <h2 className="text-3xl font-bold text-center mb-8">{isLogin ? 'Login' : 'Register'}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {!isLogin && (
-                        <input placeholder="Username" className="w-full p-3 border rounded-xl"
-                        onChange={e => setUsername(e.target.value)} />
+                        <input required placeholder="Username" className="w-full p-3 border rounded-xl" onChange={e => setUsername(e.target.value)} />
                     )}
-                    <input placeholder="Email" type="email" className="w-full p-3 border rounded-xl"
-                    onChange={e => setEmail(e.target.value)} />
-                    <input placeholder="Password" type="password" className="w-full p-3 border rounded-xl"
-                    onChange={e => setPassword(e.target.value)} />
-                    <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
+                    <input required placeholder="Email" type="email" className="w-full p-3 border rounded-xl" onChange={e => setEmail(e.target.value)} />
+                    <input required placeholder="Password" type="password" className="w-full p-3 border rounded-xl" onChange={e => setPassword(e.target.value)} />
+                    
+                    {isLogin && (
+                        <p onClick={() => setView('forgot')} className="text-right text-xs text-blue-600 cursor-pointer hover:underline">
+                            Forgot Password?
+                        </p>
+                    )}
+
+                    <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition mt-2">
                         {isLogin ? 'Login' : 'Sign Up'}
                     </button>
-                    <p 
-                    onClick={() => setView('forgot')} 
-                    className="text-right text-xs text-blue-600 cursor-pointer hover:underline"
-                    >
-                    Forgot Password?
-                    </p>
-                    <div className="my-6 flex items-center justify-center gap-2">
+                </form>
+
+                <div className="my-6 flex items-center justify-center gap-2">
                     <hr className="w-full border-gray-300" />
                     <span className="text-gray-400 text-xs uppercase">OR</span>
                     <hr className="w-full border-gray-300" />
-                    </div>
+                </div>
 
+                {/* --- CENTERED GOOGLE LOGIN --- */}
+                <div className="flex justify-center w-full">
                     <GoogleLogin
-                    onSuccess={async (credentialResponse) => {
-                        try {
-                        const res = await axios.post('http://localhost:5000/api/auth/google', {
-                            token: credentialResponse.credential,
-                        });
-                        onLogin(res.data.token); // The backend will give us a fresh JWT
-                        toast.success("Signed in with Google!");
-                        } catch (err) {
-                        toast.error("Google login failed");
-                        }
-                    }}
-                    onError={() => toast.error("Login Failed")}
+                        onSuccess={async (credentialResponse) => {
+                            try {
+                                const res = await axios.post(`${API_URL}/google`, {
+                                    token: credentialResponse.credential,
+                                });
+                                onLogin(res.data.token);
+                                toast.success("Signed in with Google!");
+                            } catch (err) {
+                                toast.error("Google login failed on server");
+                            }
+                        }}
+                        onError={() => toast.error("Login Failed")}
                     />
-                </form>
-                <button onClick={() => setIsLogin(!isLogin)} className="w-full mt-4
-                text-blue-600 text-sm">
+                </div>
+
+                <button onClick={() => setIsLogin(!isLogin)} className="w-full mt-8 text-blue-600 text-sm">
                     {isLogin ? "Need an account? Register" : "Have an account? Login"}
                 </button>
             </div>
