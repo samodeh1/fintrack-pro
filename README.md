@@ -1,6 +1,6 @@
 # FinTrack Pro – Personal Finance Analytics Dashboard
 
-FinTrack Pro is a high-performance, persistent financial management application built with **React**, **TypeScript**, and **Tailwind CSS**. It allows users to track their income and expenses in real-time with an intuitive, professional-grade interface.
+FinanceFlow is a mature financial management platform designed for clarity and security. Developed using the MERN stack, it features high-level JWT authentication, Google OAuth integration, and real-time cloud data persistence to give users total control over their financial health.
 
 ## 🚀 Live Demo
 
