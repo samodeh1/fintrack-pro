@@ -1,35 +1,37 @@
-# FinTrack Pro – Personal Finance Analytics Dashboard
+# SmartLedger – Enterprise Financial Analytics & Asset Management
 
-FinanceFlow is a mature financial management platform designed for clarity and security. Developed using the MERN stack, it features high-level JWT authentication, Google OAuth integration, and real-time cloud data persistence to give users total control over their financial health.
+**SmartLedger** is a professional-grade, fullstack financial management platform designed for high-performance data tracking and secure asset management. Built with the **MERN stack** and **TypeScript**, it provides a seamless, cloud-synced experience for modern financial oversight.
 
-## 🚀 Live Demo
+## 🚀 Live Environment
 
-[Live Demo Link](https://fintrack-pro-xw6w.vercel.app/)
+[View Live Application](https://smartledger.vercel.app)
 
-## 🛠️ The Tech Stack
+## 🛠️ High-Level Tech Stack
 
-- **Frontend:** React 18 (Vite)
-- **Language:** TypeScript (Strict Type Checking)
-- **Styling:** Tailwind CSS (Modern Utility-First CSS)
-- **Icons:** Lucide React
-- **Deployment:** Vercel
+- **Frontend:** React 18 (Vite) with TypeScript
+- **Styling:** Tailwind CSS (Utility-first, responsive architecture)
+- **Backend:** Node.js & Express (RESTful API Design)
+- **Database:** MongoDB Atlas (Cloud NoSQL)
+- **Security:** JWT (JSON Web Tokens), Google OAuth 2.0, Bcrypt Password Hashing
+- **Communications:** Nodemailer (SMTP Transactional Email)
+- **API Client:** Axios (Asynchronous state synchronization)
 
-## 🌟 Key Features
+## 🌟 Core Features & Engineering Challenges
 
-- **Real-time Analytics:** Automatically calculates Total Balance, Income, and Expenses using advanced JavaScript array methods (`filter`, `reduce`).
-- **Data Persistence:** Implements **LocalStorage** synchronization to ensure user data survives browser refreshes.
-- **Full CRUD Functionality:** Users can create and delete transactions with instant UI updates.
-- **Type-Safe Architecture:** Built with custom TypeScript interfaces to ensure data integrity and prevent runtime errors.
-- **Responsive Dashboard:** A mobile-friendly, modern UI featuring conditional rendering and "Guard Clause" logic for data validation.
+- **Hybrid Authentication System:** Integrated a dual-layer security model supporting both standard JWT-based authentication and **Google OAuth 2.0** for a frictionless user experience.
+- **Secure Password Recovery:** Developed a transactional email workflow for password resets, utilizing encrypted tokens and time-based expiration logic.
+- **Cloud Data Persistence:** Moved beyond local storage to a fully integrated MongoDB cloud environment, ensuring user data remains persistent and accessible across any device.
+- **Type-Safe Architecture:** Implemented strict TypeScript interfaces across the entire stack to eliminate runtime errors and ensure 100% data integrity.
+- **Real-time Financial Engine:** Leveraged advanced JavaScript array methods (`filter`, `reduce`) to build a high-speed calculation engine for balances and transactions.
 
-## 🧠 What I Learned
+## 🧠 Development Philosophy
 
-This project was designed to demonstrate mastery of modern React hooks (`useState`, `useEffect`) and the ability to manage complex application states. I focused on Immutability and Component Architecture.
+This project was architected with a **Decoupled System Design**, allowing the frontend and backend to scale independently. I focused heavily on **Defensive Programming**, utilizing guard clauses and optional chaining to handle asynchronous data states gracefully.
 
 ---
 
-### Contact
+### Contact & Collaboration
 
 **Samuel Odeh**  
-Fullstack Web Developer  
+Fullstack Software Engineer  
 Portfolio: [www.richtec.com.ng](http://www.richtec.com.ng)
