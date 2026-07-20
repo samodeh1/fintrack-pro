@@ -98,7 +98,7 @@ export const Auth = ({ onLogin }: AuthProps) => {
             <div className="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-blue-100/50 max-w-md w-full border border-gray-50">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-black text-gray-800 mb-2">
-                        Finance<span className="text-blue-600">Flow</span>
+                        Smart<span className="text-blue-600">Ledger</span>
                     </h2>
                     <p className="text-gray-400 text-sm font-medium">
                         {isLogin ? 'Welcome back! Please enter your details.' : 'Start managing your wealth today.'}

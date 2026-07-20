@@ -120,7 +120,7 @@ return (
 
         {/* HEADER */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 tracking-tight">Finance <span className="text-blue-600">Flow</span></h1>
+          <h1 className="text-3xl font-bold text-gray-800 tracking-tight">Smart<span className="text-blue-600">Ledger</span></h1>
           <button onClick={handleLogout}
           className="flex items-center gap-2 text-red-500 hover:bg-red-50
           px-4 py-2 rounded-lg transition font-medium"
