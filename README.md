@@ -2,7 +2,7 @@
 
 **SmartLedger** is a professional-grade, fullstack financial management platform designed for high-performance data tracking and secure asset management. Built with the **MERN stack** and **TypeScript**, it provides a seamless, cloud-synced experience for modern financial oversight.
 
-## 🚀 Live Environment
+## Live Environment
 
 [View Live Application](https://smartledger.vercel.app)
 

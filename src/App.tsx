@@ -176,7 +176,7 @@ return (
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-400 uppercase font-bold mb-1">Total Balance</p>
-                <h2 className="text-2xl font-bold">${balance.toLocaleString()}</h2>
+                <h2 className="text-2xl font-bold">₦{balance.toLocaleString()}</h2>
               </div>
               <Wallet className="text-blue-500" />
             </div>
@@ -186,7 +186,7 @@ return (
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-gray-400 uppercase font-bold mb-1">Income</p>
-                <h2 className="text-2xl font-bold text-green-600">+${income.toLocaleString()}</h2>
+                <h2 className="text-2xl font-bold text-green-600">+₦{income.toLocaleString()}</h2>
               </div>
               <TrendingUp className="text-green-500" />
             </div>
@@ -196,7 +196,7 @@ return (
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-gray-400 uppercase font-bold mb-1">Expenses</p>
-                <h2 className="text-2xl font-bold text-red-600">-${expenses.toLocaleString()}</h2>
+                <h2 className="text-2xl font-bold text-red-600">-₦{expenses.toLocaleString()}</h2>
               </div>
               <TrendingDown className="text-red-500" />
             </div>
@@ -231,7 +231,7 @@ return (
 
                   <div className="flex items-center gap-6">
                     <span className="{`font-bold text-lg ${t.type === 'income' ? 'text-green-600' : 'text-red-500'}`}">
-                      {t.type === 'income' ? '+' : '-'}${t.amount}
+                      {t.type === 'income' ? '+' : '-'}₦{t.amount}
                     </span>
                     <button 
                       onClick={() => deleteTransanction(t._id || t.id)}
@@ -273,7 +273,7 @@ return (
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Amount ($)</label>
+                <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Amount (₦)</label>
                 <input 
                   required
                   type="number"
